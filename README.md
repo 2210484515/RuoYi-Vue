@@ -1,3 +1,15 @@
+## RuoYi-Vue-Ks
+RuoYi-Vue-Ks基于RuoYi-Vue优化改造，旨在方便快速开发，将定期同步更新
+
+主要修改如下：
+
+修改com.ruoyi.quartz.config.ScheduleConfig，启用SQLServer
+MySQL转SQLServer部分SQL书写修改，如：ifnull→isnull，sysdate→getdate，data_format→CONVERT，FIND_IN_SET→CHARINDEX
+application.yml PageHelper分页插件修改为sqlserver
+application-druid.yml数据源
+ruoyi-admin下的pom.xml引入mssql-jdbc
+数据库部分字段修改（sys_notice）
+
 <p align="center">
 	<img alt="logo" src="https://oscimg.oschina.net/oscnet/up-d3d0a9303e11d522a06cd263f3079027715.png">
 </p>
