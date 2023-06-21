@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${packageName}.mapper.${ClassName}Mapper">
+#if($table.sub)
+    <select id="select${subClassName}By${pkColumn.capJavaField}" parameterType="${pkColumn.javaType}" resultType="${packageName}.domain.${ClassName}">
+        select * from ${subTableName} where ${subTableFkName} = #{${pkColumn.javaField}}
+    </select>
+
+    <delete id="delete${subClassName}By${subTableFkClassName}" parameterType="${pkColumn.javaType}">
+        delete from ${subTableName} where ${subTableFkName} = #{${pkColumn.javaField}}
+    </delete>
+#end
+</mapper>
