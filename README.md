@@ -4,10 +4,10 @@ RuoYi-Vue-Ks基于RuoYi-Vue优化改造，集成mybatisplus、knife4j、hutool�
 
 主要修改如下：
 
-集成mybatisplus实现mybatis增强
-集成knife4j实现swagger文档增强
-集成hutool提供java工具类库
-集成lombok插件简化实体类代码
+* 集成mybatisplus实现mybatis增强
+* 集成knife4j实现swagger文档增强
+* 集成hutool提供java工具类库
+* 集成lombok插件简化实体类代码
 
 特别说明：
 
