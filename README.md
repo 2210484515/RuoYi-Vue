@@ -1,18 +1,19 @@
 ## RuoYi-Vue-Ks
 
-RuoYi-Vue-Ks基于RuoYi-Vue优化改造，集成mybatisplus、knife4j、Hutool、lombok等组件，同步修改代码生成，旨在方便快速开发，将定期与RuoYi-Vue同步更新。
+RuoYi-Vue-Ks基于RuoYi-Vue优化改造，集成mybatisplus、knife4j、hutool、lombok等组件，同步修改代码生成，旨在方便快速开发，将定期与RuoYi-Vue同步更新。
 
 主要修改如下：
 
-* 集成mybatisplus实现mybatis增强
-* 集成knife4j实现swagger文档增强
-* 集成Hutool提供Java工具类库
-* 集成lombok插件简化实体类代码
+集成mybatisplus实现mybatis增强
+集成knife4j实现swagger文档增强
+集成hutool提供java工具类库
+集成lombok插件简化实体类代码
 
 特别说明：
 
-* 建数据表必须包含5个默认字段（create_by、create_time、update_by、update_time、remark）
-* 如需使用逻辑删除功能，只需在数据表中添加deleted字段（0表示未删除，1表示已删除）
+* 建数据表必须包含5个默认字段（create_by、create_time、update_by、update_time、remark）。
+* 如需使用逻辑删除功能，只需在数据表中添加deleted字段（0表示未删除，1表示已删除）。
+* 生成主子表增删改查代码时，子表的mapper接口、xml文件需要单独生成。
 
 <p align="center">
 	<img alt="logo" src="https://oscimg.oschina.net/oscnet/up-d3d0a9303e11d522a06cd263f3079027715.png">

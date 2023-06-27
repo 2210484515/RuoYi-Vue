@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 #if($table.sub)
 import java.util.Arrays;
 import java.util.List;
-import java.util.ArrayList;
 import com.ruoyi.common.utils.StringUtils;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +56,9 @@ public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper, ${C
     {
         List<${ClassName}> ${className}List = ${className}Mapper.selectList(new QueryWrapper<${ClassName}>(${className}));
         if (StringUtils.isNotNull(${className}List)) {
-            for (${ClassName} temp${className} : ${className}List) {
-                List<${subClassName}> ${subclassName}List = ${className}Mapper.select${subClassName}By${pkColumn.capJavaField}(${pkColumn.javaField});
-                temp${className}.set${subClassName}List(${subclassName}List);
+            for (${ClassName} temp : ${className}List) {
+                List<${subClassName}> ${subclassName}List = ${className}Mapper.select${subClassName}By${pkColumn.capJavaField}(temp.get${pkColumn.capJavaField}());
+                temp.set${subClassName}List(${subclassName}List);
             }
         }
         return ${className}List;
@@ -106,10 +105,8 @@ public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper, ${C
     public int delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaType}[] ${pkColumn.javaField}s)
     {
         List<${pkColumn.javaType}> ${pkColumn.javaField}List = Arrays.asList(${pkColumn.javaField}s);
-        if (StringUtils.isNotNull(${pkColumn.javaField}List)) {
-            for (${pkColumn.javaType} ${pkColumn.javaField} : ${pkColumn.javaField}List) {
-                ${className}Mapper.delete${subClassName}By${subTableFkClassName}(${pkColumn.javaField});
-            }
+        for (${pkColumn.javaType} ${pkColumn.javaField} : ${pkColumn.javaField}List) {
+            ${className}Mapper.delete${subClassName}By${subTableFkClassName}(${pkColumn.javaField});
         }
         return ${className}Mapper.deleteBatchIds(${pkColumn.javaField}List);
     }
