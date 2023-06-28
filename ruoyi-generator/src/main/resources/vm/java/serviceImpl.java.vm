@@ -1,14 +1,16 @@
 package ${packageName}.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.ruoyi.common.utils.StringUtils;
+import java.util.List;
+import java.util.Map;
 #if($table.sub)
 import java.util.Arrays;
-import java.util.List;
-import com.ruoyi.common.utils.StringUtils;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import ${packageName}.domain.${subClassName};
 import ${packageName}.mapper.${subClassName}Mapper;
 #end
@@ -24,12 +26,36 @@ import ${packageName}.service.I${ClassName}Service;
  */
 @Service
 public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper, ${ClassName}> implements I${ClassName}Service {
-#if($table.sub)
+
     @Autowired
     private ${ClassName}Mapper ${className}Mapper;
+#if($table.sub)
     @Autowired
     private ${subClassName}Mapper ${subclassName}Mapper;
+#end
 
+    /**
+     * 查询${functionName}列表
+     *
+     * @param ${className} ${functionName}
+     * @return ${functionName}
+     */
+    @Override
+    public List<${ClassName}> select${ClassName}List(${ClassName} ${className})
+    {
+        List<${ClassName}> ${className}List = ${className}Mapper.selectList(buildQueryWrapper(${className}));
+#if($table.sub)
+        if (StringUtils.isNotNull(${className}List)) {
+            for (${ClassName} temp : ${className}List) {
+                List<${subClassName}> ${subclassName}List = ${className}Mapper.select${subClassName}By${pkColumn.capJavaField}(temp.get${pkColumn.capJavaField}());
+                temp.set${subClassName}List(${subclassName}List);
+            }
+        }
+#end
+        return ${className}List;
+    }
+
+#if($table.sub)
     /**
      * 查询${functionName}
      *
@@ -43,25 +69,6 @@ public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper, ${C
         List<${subClassName}> ${subclassName}List = ${className}Mapper.select${subClassName}By${pkColumn.capJavaField}(${pkColumn.javaField});
         ${className}.set${subClassName}List(${subclassName}List);
         return ${className};
-    }
-
-    /**
-     * 查询${functionName}列表
-     *
-     * @param ${className} ${functionName}
-     * @return ${functionName}
-     */
-    @Override
-    public List<${ClassName}> select${ClassName}List(${ClassName} ${className})
-    {
-        List<${ClassName}> ${className}List = ${className}Mapper.selectList(new QueryWrapper<${ClassName}>(${className}));
-        if (StringUtils.isNotNull(${className}List)) {
-            for (${ClassName} temp : ${className}List) {
-                List<${subClassName}> ${subclassName}List = ${className}Mapper.select${subClassName}By${pkColumn.capJavaField}(temp.get${pkColumn.capJavaField}());
-                temp.set${subClassName}List(${subclassName}List);
-            }
-        }
-        return ${className}List;
     }
 
     /**
@@ -130,7 +137,7 @@ public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper, ${C
      *
      * @param ${className} ${functionName}对象
      */
-    public void insert${subClassName}(${ClassName} ${className})
+    private void insert${subClassName}(${ClassName} ${className})
     {
         List<${subClassName}> ${subclassName}List = ${className}.get${subClassName}List();
         ${pkColumn.javaType} ${pkColumn.javaField} = ${className}.get${pkColumn.capJavaField}();
@@ -142,4 +149,32 @@ public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper, ${C
         }
     }
 #end
+
+    private LambdaQueryWrapper<${ClassName}> buildQueryWrapper(${ClassName} query) {
+        Map<String, Object> params = query.getParams();
+        LambdaQueryWrapper<${ClassName}> lqw = Wrappers.lambdaQuery();
+#foreach($column in $columns)
+    #if($column.query)
+        #set($queryType=$column.queryType)
+        #set($javaField=$column.javaField)
+        #set($javaType=$column.javaType)
+        #set($columnName=$column.columnName)
+        #set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
+        #set($mpMethod=$column.queryType.toLowerCase())
+        #if($queryType != 'BETWEEN')
+            #if($javaType == 'String')
+                #set($condition='StringUtils.isNotBlank(query.get'+$AttrName+'())')
+            #else
+                #set($condition='query.get'+$AttrName+'() != null')
+            #end
+        lqw.$mpMethod($condition, ${ClassName}::get$AttrName, query.get$AttrName());
+        #else
+        lqw.between(params.get("begin$AttrName") != null && params.get("end$AttrName") != null,
+                ${ClassName}::get$AttrName ,params.get("begin$AttrName"), params.get("end$AttrName"));
+        #end
+    #end
+#end
+        return lqw;
+    }
+
 }

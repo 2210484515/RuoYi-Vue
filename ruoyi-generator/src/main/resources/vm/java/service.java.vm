@@ -11,14 +11,6 @@ import ${packageName}.domain.${ClassName};
  * @date ${datetime}
  */
 public interface I${ClassName}Service extends IService<${ClassName}> {
-#if($table.sub)
-    /**
-     * 查询${functionName}
-     *
-     * @param ${pkColumn.javaField} ${functionName}主键
-     * @return ${functionName}
-     */
-    public ${ClassName} select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaType} ${pkColumn.javaField});
 
     /**
      * 查询${functionName}列表
@@ -27,6 +19,15 @@ public interface I${ClassName}Service extends IService<${ClassName}> {
      * @return ${functionName}集合
      */
     public List<${ClassName}> select${ClassName}List(${ClassName} ${className});
+
+#if($table.sub)
+    /**
+     * 查询${functionName}
+     *
+     * @param ${pkColumn.javaField} ${functionName}主键
+     * @return ${functionName}
+     */
+    public ${ClassName} select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaType} ${pkColumn.javaField});
 
     /**
      * 新增${functionName}
