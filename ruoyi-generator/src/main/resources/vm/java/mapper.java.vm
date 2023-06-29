@@ -31,5 +31,13 @@ public interface ${ClassName}Mapper extends BaseMapper<${ClassName}> {
      * @return 结果
      */
     int delete${subClassName}By${subTableFkClassName}(@Param("${pkColumn.javaField}")${pkColumn.javaType} ${pkColumn.javaField});
+
+    /**
+     * 批量新增${subTable.functionName}
+     *
+     * @param ${subclassName}List ${subTable.functionName}列表
+     * @return 结果
+     */
+    int batchInsert${subClassName}(List<${subClassName}> ${subclassName}List);
 #end
 }

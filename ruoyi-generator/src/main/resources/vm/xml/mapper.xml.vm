@@ -11,7 +11,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
 #if($table.sub)
-    <select id="select${subClassName}By${pkColumn.capJavaField}" parameterType="${pkColumn.javaType}" resultType="${packageName}.domain.${ClassName}">
+    <resultMap type="${subClassName}" id="${subClassName}Result">
+        #foreach ($column in $subTable.columns)
+            <result property="${column.javaField}"    column="sub_${column.columnName}"    />
+        #end
+    </resultMap>
+
+    <select id="select${subClassName}By${pkColumn.capJavaField}" parameterType="${pkColumn.javaType}" resultType="${packageName}.domain.${subClassName}">
         select * from ${subTableName} where ${subTableFkName} = #{${pkColumn.javaField}}
     </select>
 
@@ -19,5 +25,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from ${subTableName} where ${subTableFkName} = #{${pkColumn.javaField}}
     </delete>
 
+    <insert id="batchInsert${subClassName}">
+        insert into ${subTableName}(#foreach($column in $subTable.columns) $column.columnName#if($foreach.count != $subTable.columns.size()),#end#end) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#foreach($column in $subTable.columns) #{item.$column.javaField}#if($foreach.count != $subTable.columns.size()),#end#end)
+        </foreach>
+    </insert>
 #end
+
 </mapper>

@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.Arrays;
 import org.springframework.transaction.annotation.Transactional;
 import ${packageName}.domain.${subClassName};
-import ${packageName}.mapper.${subClassName}Mapper;
 #end
 import ${packageName}.mapper.${ClassName}Mapper;
 import ${packageName}.domain.${ClassName};
@@ -29,10 +28,6 @@ public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper, ${C
 
     @Autowired
     private ${ClassName}Mapper ${className}Mapper;
-#if($table.sub)
-    @Autowired
-    private ${subClassName}Mapper ${subclassName}Mapper;
-#end
 
     /**
      * 查询${functionName}列表
@@ -144,8 +139,8 @@ public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper, ${C
         if (StringUtils.isNotNull(${subclassName}List)) {
             for (${subClassName} ${subclassName} : ${subclassName}List) {
                 ${subclassName}.set${subTableFkClassName}(${pkColumn.javaField});
-                ${subclassName}Mapper.insert(${subclassName});
             }
+            ${className}Mapper.batchInsert${subClassName}(${subclassName}List);
         }
     }
 #end
