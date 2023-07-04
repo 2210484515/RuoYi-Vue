@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 #if($table.sub)
     <resultMap type="${subClassName}" id="${subClassName}Result">
         #foreach ($column in $subTable.columns)
-            <result property="${column.javaField}"    column="sub_${column.columnName}"    />
+            <result property="${column.javaField}"    column="${column.columnName}" />
         #end
     </resultMap>
 
