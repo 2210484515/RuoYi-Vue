@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -34,6 +36,7 @@ import com.ruoyi.common.core.domain.TreeEntity;
 @NoArgsConstructor
 @Accessors(chain = true)
 @TableName("${tableName}")
+@ApiModel(value = "${ClassName}", description = "${functionName}实体")
 public class ${ClassName} extends ${Entity}
 {
     private static final long serialVersionUID = 1L;
@@ -60,6 +63,7 @@ public class ${ClassName} extends ${Entity}
 #if($column.pk)
     @TableId(type= IdType.AUTO)
 #end
+    @ApiModelProperty("$column.columnComment")
     private $column.javaType $column.javaField;
 
 #end
@@ -67,6 +71,7 @@ public class ${ClassName} extends ${Entity}
 #if($table.sub)
     /** $table.subTable.functionName信息 */
     @TableField(exist = false)
+    @ApiModelProperty("$table.subTable.functionName列表")
     private List<${subClassName}> ${subclassName}List;
 #end
 }
