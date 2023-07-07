@@ -168,6 +168,10 @@ public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper, ${C
                 ${ClassName}::get$AttrName ,params.get("begin$AttrName"), params.get("end$AttrName"));
         #end
     #end
+    #if($column.javaField == 'createTime')
+        #set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
+        lqw.orderByDesc(${ClassName}::get$AttrName);
+    #end
 #end
         return lqw;
     }
