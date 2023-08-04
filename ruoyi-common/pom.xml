@@ -137,7 +137,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.4.2</version>
+            <version>3.5.3</version>
         </dependency>
 
         <!-- lombok插件 -->
