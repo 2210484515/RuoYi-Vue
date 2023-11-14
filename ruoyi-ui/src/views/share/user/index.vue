@@ -9,14 +9,6 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="密码" prop="password">
-        <el-input
-          v-model="queryParams.password"
-          placeholder="请输入密码"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
       <el-form-item label="昵称" prop="nickname">
         <el-input
           v-model="queryParams.nickname"
@@ -29,14 +21,6 @@
         <el-input
           v-model="queryParams.roles"
           placeholder="请输入角色"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="头像地址" prop="avatarUrl">
-        <el-input
-          v-model="queryParams.avatarUrl"
-          placeholder="请输入头像地址"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -108,9 +92,12 @@
       <el-table-column label="密码" align="center" prop="password" />
       <el-table-column label="昵称" align="center" prop="nickname" />
       <el-table-column label="角色" align="center" prop="roles" />
-      <el-table-column label="头像地址" align="center" prop="avatarUrl" />
+      <el-table-column label="头像" align="center" prop="avatarUrl" >
+        <template slot-scope="scope">
+          <el-avatar :src="scope.row.avatarUrl"/>
+        </template>
+      </el-table-column>
       <el-table-column label="积分" align="center" prop="bonus" />
-      <el-table-column label="${comment}" align="center" prop="remark" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -130,7 +117,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -159,9 +146,6 @@
         </el-form-item>
         <el-form-item label="积分" prop="bonus">
           <el-input v-model="form.bonus" placeholder="请输入积分" />
-        </el-form-item>
-        <el-form-item label="${comment}" prop="remark">
-          <el-input v-model="form.remark" placeholder="请输入${comment}" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">

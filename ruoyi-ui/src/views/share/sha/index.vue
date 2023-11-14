@@ -124,7 +124,11 @@
       <el-table-column label="标题" align="center" prop="title" />
       <el-table-column label="是否原创 0:否 1:是" align="center" prop="isOriginal" />
       <el-table-column label="作者" align="center" prop="author" />
-      <el-table-column label="封面" align="center" prop="cover" />
+      <el-table-column label="封面" align="center" prop="cover" >
+        <template slot-scope="scope">
+          <el-avatar shape="square" :src="scope.row.cover"/>
+        </template>
+      </el-table-column>
       <el-table-column label="概要信息" align="center" prop="summary" />
       <el-table-column label="价格" align="center" prop="price" />
       <el-table-column label="下载地址" align="center" prop="downloadUrl" />
@@ -213,6 +217,7 @@ import { listSha, getSha, delSha, addSha, updateSha } from "@/api/share/sha";
 
 export default {
   name: "Sha",
+  dicts: ['sys_show_hide', 'sys_normal_disable'],
   data() {
     return {
       // 遮罩层

@@ -65,7 +65,11 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
       <el-table-column label="内容" align="center" prop="content" />
-      <el-table-column label="是否显示 0:否 1:是" align="center" prop="showFlag" />
+      <el-table-column label="是否启用" align="center" prop="showFlag" >
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.showFlag"/>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -117,6 +121,7 @@ import { listNotice, getNotice, delNotice, addNotice, updateNotice } from "@/api
 
 export default {
   name: "Notice",
+  dicts: ['sys_show_hide', 'sys_normal_disable'],
   data() {
     return {
       // 遮罩层

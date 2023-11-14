@@ -9,14 +9,6 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="积分操作值" prop="value">
-        <el-input
-          v-model="queryParams.value"
-          placeholder="请输入积分操作值"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
       <el-form-item label="积分事件" prop="event">
         <el-input
           v-model="queryParams.event"
@@ -88,7 +80,6 @@
     <el-table v-loading="loading" :data="logList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="Id" align="center" prop="id" />
-      <el-table-column label="${comment}" align="center" prop="remark" />
       <el-table-column label="用户id" align="center" prop="userId" />
       <el-table-column label="积分操作值" align="center" prop="value" />
       <el-table-column label="积分事件" align="center" prop="event" />
