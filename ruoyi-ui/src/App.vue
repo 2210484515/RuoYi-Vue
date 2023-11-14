@@ -7,9 +7,15 @@
 
 <script>
 import ThemePicker from "@/components/ThemePicker";
+import watermark from "watermark-dom"
 
 export default {
   name: "App",
+  mounted(){
+    //加载水印
+    const username = this.$store.state.user.name;
+    watermark.load({ watermark_txt: username + "xzx" });
+  },
   components: { ThemePicker },
     metaInfo() {
         return {
