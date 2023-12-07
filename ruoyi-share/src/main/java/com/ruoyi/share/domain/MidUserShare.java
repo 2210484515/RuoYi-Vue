@@ -32,16 +32,16 @@ public class MidUserShare extends BaseEntity
     /** $column.columnComment */
     @TableId(type= IdType.AUTO)
     @ApiModelProperty("$column.columnComment")
-    private Long id;
+    private String id;
 
     /** share.id */
     @Excel(name = "share.id")
     @ApiModelProperty("share.id")
-    private Long shareId;
+    private String shareId;
 
     /** user.id */
     @Excel(name = "user.id")
     @ApiModelProperty("user.id")
-    private Long userId;
+    private String userId;
 
 }

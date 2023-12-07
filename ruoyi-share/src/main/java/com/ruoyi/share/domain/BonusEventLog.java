@@ -32,12 +32,12 @@ public class BonusEventLog extends BaseEntity
     /** Id */
     @TableId(type= IdType.AUTO)
     @ApiModelProperty("Id")
-    private Long id;
+    private String id;
 
     /** 用户id */
     @Excel(name = "用户id")
     @ApiModelProperty("用户id")
-    private Long userId;
+    private String userId;
 
     /** 积分操作值 */
     @Excel(name = "积分操作值")

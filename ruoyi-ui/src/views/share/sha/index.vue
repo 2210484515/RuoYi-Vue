@@ -2,69 +2,29 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="发布人id" prop="userId">
-        <el-input
-          v-model="queryParams.userId"
-          placeholder="请输入发布人id"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.userId" placeholder="请输入发布人id" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="标题" prop="title">
-        <el-input
-          v-model="queryParams.title"
-          placeholder="请输入标题"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.title" placeholder="请输入标题" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
-      <el-form-item label="是否原创" prop="isOriginal">
-        <el-input
-          v-model="queryParams.isOriginal"
-          placeholder="请输入是否原创"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
+      <!-- <el-form-item label="是否原创" prop="isOriginal">
+        <el-input v-model="queryParams.isOriginal" placeholder="请输入是否原创" clearable @keyup.enter.native="handleQuery" />
+      </el-form-item> -->
       <el-form-item label="作者" prop="author">
-        <el-input
-          v-model="queryParams.author"
-          placeholder="请输入作者"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.author" placeholder="请输入作者" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
-      <el-form-item label="封面" prop="cover">
-        <el-input
-          v-model="queryParams.cover"
-          placeholder="请输入封面"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+      <!-- <el-form-item label="封面" prop="cover">
+        <el-input v-model="queryParams.cover" placeholder="请输入封面" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="概要信息" prop="summary">
-        <el-input
-          v-model="queryParams.summary"
-          placeholder="请输入概要信息"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.summary" placeholder="请输入概要信息" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="下载数 " prop="buyCount">
-        <el-input
-          v-model="queryParams.buyCount"
-          placeholder="请输入下载数 "
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.buyCount" placeholder="请输入下载数 " clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="是否显示" prop="showFlag">
-        <el-input
-          v-model="queryParams.showFlag"
-          placeholder="请输入是否显示"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
+        <el-input v-model="queryParams.showFlag" placeholder="请输入是否显示" clearable @keyup.enter.native="handleQuery" />
+      </el-form-item> -->
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -73,46 +33,20 @@
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button
-          type="primary"
-          plain
-          icon="el-icon-plus"
-          size="mini"
-          @click="handleAdd"
-          v-hasPermi="['share:sha:add']"
-        >新增</el-button>
+        <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd"
+          v-hasPermi="['share:sha:add']">新增</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button
-          type="success"
-          plain
-          icon="el-icon-edit"
-          size="mini"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['share:sha:edit']"
-        >修改</el-button>
+        <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate"
+          v-hasPermi="['share:sha:edit']">修改</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button
-          type="danger"
-          plain
-          icon="el-icon-delete"
-          size="mini"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['share:sha:remove']"
-        >删除</el-button>
+        <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete"
+          v-hasPermi="['share:sha:remove']">删除</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button
-          type="warning"
-          plain
-          icon="el-icon-download"
-          size="mini"
-          @click="handleExport"
-          v-hasPermi="['share:sha:export']"
-        >导出</el-button>
+        <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport"
+          v-hasPermi="['share:sha:export']">导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -122,47 +56,36 @@
       <el-table-column label="id" align="center" prop="id" />
       <el-table-column label="发布人id" align="center" prop="userId" />
       <el-table-column label="标题" align="center" prop="title" />
-      <el-table-column label="是否原创 0:否 1:是" align="center" prop="isOriginal" />
+      <!-- <el-table-column label="是否原创 0:否 1:是" align="center" prop="isOriginal" /> -->
       <el-table-column label="作者" align="center" prop="author" />
-      <el-table-column label="封面" align="center" prop="cover" >
+      <el-table-column label="封面" align="center" prop="cover">
         <template slot-scope="scope">
-          <el-avatar shape="square" :src="scope.row.cover"/>
+          <el-avatar shape="square" :src="scope.row.cover" />
         </template>
       </el-table-column>
       <el-table-column label="概要信息" align="center" prop="summary" />
       <el-table-column label="价格" align="center" prop="price" />
-      <el-table-column label="下载地址" align="center" prop="downloadUrl" />
+      <!-- <el-table-column label="下载地址" align="center" prop="downloadUrl" /> -->
       <el-table-column label="下载数 " align="center" prop="buyCount" />
-      <el-table-column label="是否显示 0:否 1:是" align="center" prop="showFlag" />
-      <el-table-column label="审核状态" align="center" prop="auditStatus" />
-      <el-table-column label="审核不通过原因" align="center" prop="reason" />
+      <!-- <el-table-column label="是否显示 0:否 1:是" align="center" prop="showFlag" /> -->
+      <el-table-column label="审核状态" align="center" prop="auditStatus">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.sha_audit_status" :value="scope.row.auditStatus" />
+        </template>
+      </el-table-column>
+      <!-- <el-table-column label="审核不通过原因" align="center" prop="reason" /> -->
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-            v-hasPermi="['share:sha:edit']"
-          >修改</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['share:sha:remove']"
-          >删除</el-button>
+          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
+            v-hasPermi="['share:sha:edit']">修改</el-button>
+          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
+            v-hasPermi="['share:sha:remove']">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination
-      v-show="total>0"
-      :total="total"
-      :page.sync="queryParams.pageNum"
-      :limit.sync="queryParams.pageSize"
-      @pagination="getList"
-    />
+    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
+      @pagination="getList" />
 
     <!-- 添加或修改分享对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
@@ -172,9 +95,6 @@
         </el-form-item>
         <el-form-item label="标题" prop="title">
           <el-input v-model="form.title" placeholder="请输入标题" />
-        </el-form-item>
-        <el-form-item label="${comment}" prop="remark">
-          <el-input v-model="form.remark" placeholder="请输入${comment}" />
         </el-form-item>
         <el-form-item label="是否原创 0:否 1:是" prop="isOriginal">
           <el-input v-model="form.isOriginal" placeholder="请输入是否原创 0:否 1:是" />
@@ -194,9 +114,9 @@
         <el-form-item label="下载地址" prop="downloadUrl">
           <el-input v-model="form.downloadUrl" placeholder="请输入下载地址" />
         </el-form-item>
-        <el-form-item label="下载数 " prop="buyCount">
+        <!-- <el-form-item label="下载数 " prop="buyCount">
           <el-input v-model="form.buyCount" placeholder="请输入下载数 " />
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="是否显示 0:否 1:是" prop="showFlag">
           <el-input v-model="form.showFlag" placeholder="请输入是否显示 0:否 1:是" />
         </el-form-item>
@@ -217,7 +137,7 @@ import { listSha, getSha, delSha, addSha, updateSha } from "@/api/share/sha";
 
 export default {
   name: "Sha",
-  dicts: ['sys_show_hide', 'sys_normal_disable'],
+  dicts: ['sha_audit_status'],
   data() {
     return {
       // 遮罩层
@@ -356,7 +276,7 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.id)
-      this.single = selection.length!==1
+      this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 新增按钮操作 */
@@ -398,12 +318,12 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
-      this.$modal.confirm('是否确认删除分享编号为"' + ids + '"的数据项？').then(function() {
+      this.$modal.confirm('是否确认删除分享编号为"' + ids + '"的数据项？').then(function () {
         return delSha(ids);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
-      }).catch(() => {});
+      }).catch(() => { });
     },
     /** 导出按钮操作 */
     handleExport() {

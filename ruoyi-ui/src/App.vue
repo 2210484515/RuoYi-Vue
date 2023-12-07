@@ -11,20 +11,20 @@ import watermark from "watermark-dom"
 
 export default {
   name: "App",
-  mounted(){
+  mounted() {
     //加载水印
     const username = this.$store.state.user.name;
-    watermark.load({ watermark_txt: username + "xzx" });
+    watermark.load({ watermark_txt: "yy" });
   },
   components: { ThemePicker },
-    metaInfo() {
-        return {
-            title: this.$store.state.settings.dynamicTitle && this.$store.state.settings.title,
-            titleTemplate: title => {
-                return title ? `${title} - ${process.env.VUE_APP_TITLE}` : process.env.VUE_APP_TITLE
-            }
-        }
+  metaInfo() {
+    return {
+      title: this.$store.state.settings.dynamicTitle && this.$store.state.settings.title,
+      titleTemplate: title => {
+        return title ? `${title} - ${process.env.VUE_APP_TITLE}` : process.env.VUE_APP_TITLE
+      }
     }
+  }
 };
 </script>
 <style scoped>

@@ -32,7 +32,7 @@ public class Share extends BaseEntity
     /** id */
     @TableId(type= IdType.AUTO)
     @ApiModelProperty("id")
-    private Long id;
+    private String id;
 
     /** 发布人id */
     @Excel(name = "发布人id")

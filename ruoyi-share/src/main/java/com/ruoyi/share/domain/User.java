@@ -32,7 +32,7 @@ public class User extends BaseEntity
     /** Id */
     @TableId(type= IdType.AUTO)
     @ApiModelProperty("Id")
-    private Long id;
+    private String id;
 
     /** 手机号 */
     @Excel(name = "手机号")
